@@ -1,4 +1,4 @@
-rootProject.name = "Sozlik"
+rootProject.name = "sozlik-cmp"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {

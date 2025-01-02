@@ -1,20 +1,37 @@
 [versions]
-android-compileSdk = "34"
-android-minSdk = "24"
-android-targetSdk = "34"
-androidx-activityCompose = "1.9.3"
+android_compileSdk = "35"
+android_minSdk = "24"
+android_targetSdk = "35"
+compose = "1.9.3"
 compose-multiplatform = "1.7.1"
+coroutines = "1.10.1"
+decompose = "3.2.2"
 gradle = "8.7.3"
+koin = "4.0.1"
 kotlin = "2.1.0"
-kotlinx-coroutines = "1.10.1"
+serialization = "1.7.3"
+settings = "1.1.1"
+sqldelight = "1.5.5"
 
 [libraries]
-androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
-kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
+activity_compose = { module = "androidx.activity:activity-compose", version.ref = "compose" }
+coroutines_core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+coroutines_swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "coroutines" }
+decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
+decompose_compose = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "decompose" }
+koin_core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+serialization_json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
+settings = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "settings" }
+sqldelight_android = { module = "com.squareup.sqldelight:android-driver", version.ref = "sqldelight" }
+sqldelight_jvm = { module = "com.squareup.sqldelight:sqlite-driver", version.ref = "sqldelight" }
+sqldelight_native = { module = "com.squareup.sqldelight:native-driver", version.ref = "sqldelight" }
+sqldelight_runtime = { module = "com.squareup.sqldelight:runtime", version.ref = "sqldelight" }
 
 [plugins]
-android-application = { id = "com.android.application", version.ref = "gradle" }
-android-library = { id = "com.android.library", version.ref = "gradle" }
-compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+android_application = { id = "com.android.application", version.ref = "gradle" }
+android_library = { id = "com.android.library", version.ref = "gradle" }
+compose_multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
+compose_compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin_multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin_serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+sqldelight = { id = "com.squareup.sqldelight", version.ref = "sqldelight" }

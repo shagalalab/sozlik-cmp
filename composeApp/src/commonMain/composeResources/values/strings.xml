@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="about">Haqqında</string>
+    <string name="about_content">
+        <![CDATA[Sózlik baǵdarlaması <b>Shaǵala Lab</b> toparı tárepinen islep shıǵıldı. Topardıń basqa jumısları menen <u>www.shagalalab.com</u> saytında tanısıw imkániyatına iyesiz.
+        \n\nBaǵdarlama: \n- 1970-jılı V.D.Arakin redaktorlıǵında "Qaraqalpaqstan" baspasınan shıqqan "qaraqalpaqsha-inglisshe sózlik"
+        \n- 1967-jılı N.A.Baskakov redaktorlıǵında "Sovetskaya Enciklopediya" baspasınan shıqqan "russha-qaraqalpaqsha sózlik"
+        \nkitaplarına tiykarlanǵan.]]>
+    </string>
+    <string name="app_name">Sózlik</string>
+    <string name="favorites">Saylandılar</string>
+    <string name="favorites_empty">Siz ele hesh bir sózdi saylandılar qatarına qospadıńız, qosqanlarıńız usı jerde kórinedi.</string>
+    <string name="layout_cyrillic">Кирилл</string>
+    <string name="layout_latin">Latın</string>
+    <string name="search">Izlew</string>
+    <string name="search_placeholder">Izlegen sózińizdi kiritiń</string>
+    <string name="select_app_layout">Jazıw túrin tańlań</string>
+    <string name="select_app_layout_description">Esletpe: jazıw túrine kirgizilgen ózgeris ámelde islewi ushın, baǵdarlamanı qaytadan iske qosıw (restart) talap etiliwi múmkin.</string>
+    <string name="selected_language">Saylanǵan álipbe</string>
+    <string name="settings">Sazlawlar</string>
+    <string name="share">Bólisiw</string>
+    <string name="suggestion_found">&lt;b&gt;%s&lt;/b&gt; sózi tabılmadı, bálkim tómendegilerdi izlegen shıǵarsız:</string>
+    <string name="suggestion_not_found">&lt;b&gt;%s&lt;/b&gt; sózi boyınsha nátiyjeler tabılmadı.</string>
+</resources>

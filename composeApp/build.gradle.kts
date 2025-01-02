@@ -7,6 +7,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.sqldelight)
 }
 
 kotlin {
@@ -32,19 +34,34 @@ kotlin {
     sourceSets {
         val desktopMain by getting
         
-        androidMain.dependencies {
-            implementation(compose.preview)
-            implementation(libs.androidx.activity.compose)
-        }
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
             implementation(compose.ui)
+            implementation(compose.components.resources)
+
+            implementation(libs.decompose)
+            implementation(libs.decompose.compose)
+            implementation(libs.serialization.json)
+            implementation(libs.settings)
+            implementation(libs.sqldelight.runtime)
+
+            api(libs.coroutines.core)
+            api(libs.koin.core)
+        }
+        androidMain.dependencies {
+            implementation(compose.preview)
+            implementation(libs.activity.compose)
+            implementation(libs.sqldelight.android)
+        }
+        iosMain.dependencies {
+            implementation(libs.sqldelight.native)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
-            implementation(libs.kotlinx.coroutines.swing)
+            implementation(libs.coroutines.swing)
+            implementation(libs.sqldelight.jvm)
         }
     }
 }
@@ -89,5 +106,11 @@ compose.desktop {
             packageName = "com.shagalalab.sozlik"
             packageVersion = "1.0.0"
         }
+    }
+}
+
+sqldelight {
+    database("SozlikDatabase") {
+        packageName = "com.shagalalab.sozlik"
     }
 }
