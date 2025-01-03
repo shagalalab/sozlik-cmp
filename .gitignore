@@ -7,6 +7,7 @@ xcuserdata
 local.properties
 .idea
 .DS_Store
+composeApp/sozlik.db
 captures
 .externalNativeBuild
 .cxx

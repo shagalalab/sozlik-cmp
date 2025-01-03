@@ -1,0 +1,54 @@
+CREATE TABLE IF NOT EXISTS DictionaryDb (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    type INTEGER AS Int NOT NULL,
+    word TEXT NOT NULL,
+    raw_word TEXT,
+    translation TEXT NOT NULL,
+    is_favorite INTEGER AS Boolean,
+    last_accessed INTEGER
+);
+
+selectAll:
+SELECT id, word
+FROM DictionaryDb;
+
+selectById:
+SELECT *
+FROM DictionaryDb
+WHERE id = ?;
+
+selectByWord:
+SELECT id, type, word
+FROM DictionaryDb
+WHERE word = ?;
+
+selectLike:
+SELECT id, type, word
+FROM DictionaryDb
+WHERE word LIKE (:word || '%');
+
+selectFavorites:
+SELECT *
+FROM DictionaryDb
+WHERE is_favorite = 1;
+
+selectLastAccessed:
+SELECT *
+FROM DictionaryDb
+WHERE last_accessed > 0
+ORDER BY last_accessed
+DESC LIMIT 30;
+
+insert:
+INSERT OR IGNORE INTO DictionaryDb(type, word, raw_word, translation)
+VALUES (?, ?, ?, ?);
+
+updateFavorite:
+UPDATE DictionaryDb
+SET is_favorite = :isFavorite
+WHERE id = :dictionaryId;
+
+updateLastAccessTime:
+UPDATE DictionaryDb
+SET last_accessed = :lastAccessedTime
+WHERE id = :dictionaryId;
