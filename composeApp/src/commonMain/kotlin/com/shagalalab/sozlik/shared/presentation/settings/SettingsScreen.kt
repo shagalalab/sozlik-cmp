@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -27,24 +26,33 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.LinkAnnotation
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextLinkStyles
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withLink
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import com.shagalalab.sozlik.resources.Res
 import com.shagalalab.sozlik.resources.about
-import com.shagalalab.sozlik.resources.about_content
+import com.shagalalab.sozlik.resources.about_content1
+import com.shagalalab.sozlik.resources.about_content2
+import com.shagalalab.sozlik.resources.about_content3
 import com.shagalalab.sozlik.resources.info
 import com.shagalalab.sozlik.resources.languages
+import com.shagalalab.sozlik.resources.publisher
 import com.shagalalab.sozlik.resources.select_app_layout
 import com.shagalalab.sozlik.resources.select_app_layout_description
 import com.shagalalab.sozlik.resources.selected_language
 import com.shagalalab.sozlik.resources.settings
 import com.shagalalab.sozlik.resources.share
+import com.shagalalab.sozlik.resources.website
 import com.shagalalab.sozlik.shared.domain.component.settings.SettingsComponent
 import com.shagalalab.sozlik.shared.domain.component.settings.about.SettingsAboutComponent
 import com.shagalalab.sozlik.shared.domain.component.settings.layout.SettingsLayoutComponent
 import com.shagalalab.sozlik.shared.util.isSettingsShareEnabled
-import com.shagalalab.sozlik.shared.util.parseHtml
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -160,25 +168,24 @@ fun SelectAboutDialog(component: SettingsAboutComponent) {
             Text(text = stringResource(Res.string.about))
         },
         text = {
-            val parsedAboutString = stringResource(Res.string.about_content).parseHtml()
             val annotatedAboutStringWithUrl = buildAnnotatedString {
-                append(parsedAboutString)
-                // attach a string annotation that stores a URL to the text "Jetpack Compose".
-                addStringAnnotation(
-                    tag = "URL",
-                    annotation = "https://$shagalalabUrl",
-                    start = parsedAboutString.indexOf(shagalalabUrl),
-                    end = parsedAboutString.indexOf(shagalalabUrl) + shagalalabUrl.length
-                )
+                append(stringResource(Res.string.about_content1))
+                withStyle(SpanStyle(fontWeight = FontWeight.SemiBold)) {
+                    append(stringResource(Res.string.publisher))
+                }
+                append(stringResource(Res.string.about_content2))
+                withLink(
+                    LinkAnnotation.Url(
+                        url = stringResource(Res.string.website),
+                        styles = TextLinkStyles(style = SpanStyle(color = MaterialTheme.colorScheme.primary))
+                    )
+                ) {
+                    append(stringResource(Res.string.publisher))
+                }
+                append(stringResource(Res.string.about_content3))
             }
 
-            ClickableText(annotatedAboutStringWithUrl) { offset ->
-                annotatedAboutStringWithUrl
-                    .getStringAnnotations("URL", offset, offset)
-                    .firstOrNull()?.let { stringAnnotation ->
-                        uriHandler.openUri(stringAnnotation.item)
-                    }
-            }
+            Text(annotatedAboutStringWithUrl)
         }
     )
 }
