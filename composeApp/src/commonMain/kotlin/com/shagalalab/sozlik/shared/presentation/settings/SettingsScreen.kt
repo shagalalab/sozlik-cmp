@@ -10,10 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.text.ClickableText
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material.icons.outlined.Share
-import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -29,26 +25,29 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
+import com.shagalalab.sozlik.resources.Res
+import com.shagalalab.sozlik.resources.about
+import com.shagalalab.sozlik.resources.about_content
+import com.shagalalab.sozlik.resources.info
+import com.shagalalab.sozlik.resources.languages
+import com.shagalalab.sozlik.resources.select_app_layout
+import com.shagalalab.sozlik.resources.select_app_layout_description
+import com.shagalalab.sozlik.resources.selected_language
+import com.shagalalab.sozlik.resources.settings
+import com.shagalalab.sozlik.resources.share
 import com.shagalalab.sozlik.shared.domain.component.settings.SettingsComponent
 import com.shagalalab.sozlik.shared.domain.component.settings.about.SettingsAboutComponent
 import com.shagalalab.sozlik.shared.domain.component.settings.layout.SettingsLayoutComponent
 import com.shagalalab.sozlik.shared.util.isSettingsShareEnabled
 import com.shagalalab.sozlik.shared.util.parseHtml
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import sozlik_cmp.composeapp.generated.resources.Res
-import sozlik_cmp.composeapp.generated.resources.about
-import sozlik_cmp.composeapp.generated.resources.about_content
-import sozlik_cmp.composeapp.generated.resources.select_app_layout
-import sozlik_cmp.composeapp.generated.resources.select_app_layout_description
-import sozlik_cmp.composeapp.generated.resources.selected_language
-import sozlik_cmp.composeapp.generated.resources.settings
-import sozlik_cmp.composeapp.generated.resources.share
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -60,14 +59,14 @@ fun SettingsScreen(component: SettingsComponent, modifier: Modifier = Modifier) 
         Column(modifier) {
             TopAppBar(title = { Text(stringResource(Res.string.settings)) })
             SettingsItem(
-                Icons.Outlined.Star,//Translate,
+                Res.drawable.languages,
                 stringResource(Res.string.selected_language),
                 value = selectedOption,
                 onClick = component::onClickLayout
             )
-            SettingsItem(Icons.Outlined.Info, stringResource(Res.string.about), onClick = component::onClickAbout)
+            SettingsItem(Res.drawable.info, stringResource(Res.string.about), onClick = component::onClickAbout)
             if (isSettingsShareEnabled) {
-                SettingsItem(Icons.Outlined.Share, stringResource(Res.string.share), onClick = component::onClickShare)
+                SettingsItem(Res.drawable.share, stringResource(Res.string.share), onClick = component::onClickShare)
             }
         }
 
@@ -87,13 +86,13 @@ fun SettingsScreen(component: SettingsComponent, modifier: Modifier = Modifier) 
 }
 
 @Composable
-private fun SettingsItem(icon: ImageVector, label: String, value: String = "", modifier: Modifier = Modifier, onClick: () -> Unit) {
+private fun SettingsItem(icon: DrawableResource, label: String, value: String = "", modifier: Modifier = Modifier, onClick: () -> Unit) {
     Column(modifier = modifier.clickable(onClick = onClick)) {
         Row(
             modifier = Modifier.fillMaxWidth().height(56.dp).padding(horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(icon, contentDescription = null)
+            Icon(painter = painterResource(icon), contentDescription = null)
             Text(label, modifier = Modifier.fillMaxWidth().weight(1f).padding(horizontal = 16.dp))
             if (value.isNotEmpty()) {
                 Text(value)

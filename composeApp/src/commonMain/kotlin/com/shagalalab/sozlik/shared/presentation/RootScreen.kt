@@ -5,10 +5,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -27,16 +23,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
+import com.shagalalab.sozlik.resources.Res
+import com.shagalalab.sozlik.resources.favorites
+import com.shagalalab.sozlik.resources.heart_border
+import com.shagalalab.sozlik.resources.search
+import com.shagalalab.sozlik.resources.settings
 import com.shagalalab.sozlik.shared.domain.component.root.RootComponent
 import com.shagalalab.sozlik.shared.presentation.flow.FavoritesFlowScreen
 import com.shagalalab.sozlik.shared.presentation.flow.SearchFlowScreen
 import com.shagalalab.sozlik.shared.presentation.flow.SettingsFlowScreen
 import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import sozlik_cmp.composeapp.generated.resources.Res
-import sozlik_cmp.composeapp.generated.resources.favorites
-import sozlik_cmp.composeapp.generated.resources.search
-import sozlik_cmp.composeapp.generated.resources.settings
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
@@ -51,21 +49,21 @@ fun RootScreen(component: RootComponent) {
         bottomBar = {
             NavigationBar {
                 NavigationBarItem(
-                    icon = { Icon(Icons.Filled.Search, contentDescription = null) },
+                    icon = { Icon(painter = painterResource(Res.drawable.search), contentDescription = null) },
                     label = { Text(stringResource(Res.string.search)) },
                     selected = activeComponent is RootComponent.Child.SearchFlowChild,
                     onClick = component::onSearchTabClicked,
                     enabled = !isLoading
                 )
                 NavigationBarItem(
-                    icon = { Icon(Icons.Filled.Favorite, contentDescription = null) },
+                    icon = { Icon(painter = painterResource(Res.drawable.heart_border), contentDescription = null) },
                     label = { Text(stringResource(Res.string.favorites)) },
                     selected = activeComponent is RootComponent.Child.FavoritesFlowChild,
                     onClick = component::onFavoritesTabClicked,
                     enabled = !isLoading
                 )
                 NavigationBarItem(
-                    icon = { Icon(Icons.Filled.Settings, contentDescription = null) },
+                    icon = { Icon(painter = painterResource(Res.drawable.settings), contentDescription = null) },
                     label = { Text(stringResource(Res.string.settings)) },
                     selected = activeComponent is RootComponent.Child.SettingsFlowChild,
                     onClick = component::onSettingsTabClicked,

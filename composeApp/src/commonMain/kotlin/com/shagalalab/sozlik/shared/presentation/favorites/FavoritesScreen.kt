@@ -10,9 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -29,12 +26,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.shagalalab.sozlik.resources.Res
+import com.shagalalab.sozlik.resources.favorites
+import com.shagalalab.sozlik.resources.favorites_empty
+import com.shagalalab.sozlik.resources.heart
+import com.shagalalab.sozlik.resources.heart_border
 import com.shagalalab.sozlik.shared.domain.component.favorites.FavoritesComponent
 import com.shagalalab.sozlik.shared.domain.mvi.model.Dictionary
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import sozlik_cmp.composeapp.generated.resources.Res
-import sozlik_cmp.composeapp.generated.resources.favorites
-import sozlik_cmp.composeapp.generated.resources.favorites_empty
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -46,7 +46,7 @@ fun FavoritesScreen(component: FavoritesComponent, modifier: Modifier = Modifier
             Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Image(
-                        Icons.Filled.FavoriteBorder,
+                        painter = painterResource(Res.drawable.heart_border),
                         contentDescription = null,
                         colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.outline),
                         modifier = Modifier.size(100.dp),
@@ -74,7 +74,7 @@ private fun FavoriteItem(word: Dictionary, itemClick: (Long) -> Unit, onFavorite
         Row(modifier = Modifier.padding(horizontal = 16.dp), verticalAlignment = Alignment.CenterVertically) {
             Text(word.word, modifier = Modifier.padding(vertical = 12.dp).weight(1f))
             IconButton(onClick = { onFavoriteClick(word.id) }) {
-                Icon(Icons.Filled.Favorite, contentDescription = null)
+                Icon(painter = painterResource(Res.drawable.heart), contentDescription = null)
             }
         }
         HorizontalDivider()

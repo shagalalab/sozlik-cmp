@@ -7,11 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.outlined.FavoriteBorder
-import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -29,14 +24,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
+import com.shagalalab.sozlik.resources.Raleway_Bold
+import com.shagalalab.sozlik.resources.Res
+import com.shagalalab.sozlik.resources.arrow_left
+import com.shagalalab.sozlik.resources.book
+import com.shagalalab.sozlik.resources.heart
+import com.shagalalab.sozlik.resources.heart_border
+import com.shagalalab.sozlik.resources.share
 import com.shagalalab.sozlik.shared.domain.component.translation.TranslationComponent
 import com.shagalalab.sozlik.shared.presentation.common.FlagFromTo
 import com.shagalalab.sozlik.shared.util.parseHtml
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.painterResource
-import sozlik_cmp.composeapp.generated.resources.Raleway_Bold
-import sozlik_cmp.composeapp.generated.resources.Res
-import sozlik_cmp.composeapp.generated.resources.book
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -47,16 +46,16 @@ fun TranslationScreen(component: TranslationComponent, modifier: Modifier = Modi
         TopAppBar(
             navigationIcon = {
                 IconButton(onClick = component::onBackButtonPress) {
-                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
+                    Icon(painter = painterResource(Res.drawable.arrow_left), contentDescription = null)
                 }
             },
             title = {},
             actions = {
                 IconButton(onClick = component::onFavoriteClick) {
-                    Icon(if (state.isFavorite) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder, contentDescription = null)
+                    Icon(painter = painterResource(if (state.isFavorite) Res.drawable.heart else Res.drawable.heart_border), contentDescription = null)
                 }
                 IconButton(onClick = {}) {
-                    Icon(Icons.Outlined.Share, contentDescription = null)
+                    Icon(painter = painterResource(Res.drawable.share), contentDescription = null)
                 }
             }
         )

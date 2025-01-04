@@ -5,9 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -21,13 +18,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import com.shagalalab.sozlik.resources.Res
+import com.shagalalab.sozlik.resources.app_name
+import com.shagalalab.sozlik.resources.search
+import com.shagalalab.sozlik.resources.search_placeholder
+import com.shagalalab.sozlik.resources.x
 import com.shagalalab.sozlik.shared.domain.component.search.SearchComponent
 import com.shagalalab.sozlik.shared.presentation.common.WordList
 import com.shagalalab.sozlik.shared.util.parseHtml
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import sozlik_cmp.composeapp.generated.resources.Res
-import sozlik_cmp.composeapp.generated.resources.app_name
-import sozlik_cmp.composeapp.generated.resources.search_placeholder
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -44,11 +44,11 @@ fun SearchScreen(component: SearchComponent, modifier: Modifier = Modifier) {
             },
             modifier = Modifier.padding(16.dp).fillMaxWidth(),
             placeholder = { Text(stringResource(Res.string.search_placeholder)) },
-            leadingIcon = { Icon(Icons.Filled.Search, null) },
+            leadingIcon = { Icon(painter = painterResource(Res.drawable.search), contentDescription = null) },
             trailingIcon = {
                 if (query.isNotEmpty()) {
                     IconButton(onClick = { component.onQueryChanged("") }) {
-                        Icon(Icons.Filled.Close, null)
+                        Icon(painter = painterResource(Res.drawable.x), null)
                     }
                 }
             },

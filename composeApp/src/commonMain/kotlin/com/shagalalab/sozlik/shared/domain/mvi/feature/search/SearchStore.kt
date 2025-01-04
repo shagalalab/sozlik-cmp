@@ -1,14 +1,14 @@
 package com.shagalalab.sozlik.shared.domain.mvi.feature.search
 
+import com.shagalalab.sozlik.resources.Res
+import com.shagalalab.sozlik.resources.suggestion_found
+import com.shagalalab.sozlik.resources.suggestion_not_found
 import com.shagalalab.sozlik.shared.domain.mvi.base.Store
 import com.shagalalab.sozlik.shared.domain.repository.DictionaryRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import org.jetbrains.compose.resources.getString
 import org.koin.core.component.KoinComponent
-import sozlik_cmp.composeapp.generated.resources.Res
-import sozlik_cmp.composeapp.generated.resources.suggestion_found
-import sozlik_cmp.composeapp.generated.resources.suggestion_not_found
 
 class SearchStore(
     private val repository: DictionaryRepository,

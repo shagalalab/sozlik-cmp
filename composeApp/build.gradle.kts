@@ -115,3 +115,9 @@ sqldelight {
         packageName = "com.shagalalab.sozlik"
     }
 }
+
+compose.resources {
+    publicResClass = false // internal by default
+    packageOfResClass = "com.shagalalab.sozlik.resources"
+    generateResClass = auto
+}
