@@ -29,7 +29,7 @@ interface RootComponent {
     fun onSearchTabClicked()
     fun onFavoritesTabClicked()
     fun onSettingsTabClicked()
-    fun checkDbPopulated(qqen: String?, ruqq: String?)
+    fun checkDbPopulated()
 
     sealed interface Child {
         class SearchFlowChild(val component: SearchFlowComponent) : Child
@@ -72,8 +72,8 @@ class RootComponentImpl(componentContext: ComponentContext) : RootComponent, Koi
         navigation.bringToFront(Config.SettingsFlow)
     }
 
-    override fun checkDbPopulated(qqen: String?, ruqq: String?) {
-        dbPopulateStore.dispatch(DbPopulateAction.DbPopulateCheck(qqen, ruqq))
+    override fun checkDbPopulated() {
+        dbPopulateStore.dispatch(DbPopulateAction.DbPopulateCheck)
     }
 
     private fun child(config: Config, componentContext: ComponentContext): RootComponent.Child =

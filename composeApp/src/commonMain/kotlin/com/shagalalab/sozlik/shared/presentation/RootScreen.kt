@@ -1,6 +1,5 @@
 package com.shagalalab.sozlik.shared.presentation
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,12 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import com.shagalalab.sozlik.resources.Res
@@ -41,8 +36,6 @@ import org.jetbrains.compose.resources.stringResource
 fun RootScreen(component: RootComponent) {
     val childStack by component.childStack.subscribeAsState()
     val isLoading by component.isLoading.collectAsState(false)
-    var bytesQqEn by remember { mutableStateOf(ByteArray(0)) }
-    var bytesRuQq by remember { mutableStateOf(ByteArray(0)) }
     val activeComponent = childStack.active.instance
 
     Scaffold(
@@ -87,7 +80,6 @@ fun RootScreen(component: RootComponent) {
         if (isLoading) {
             Box(
                 modifier = Modifier.fillMaxSize()
-                    .background(Color.LightGray.copy(alpha = 0.7f))
                     .clickable(enabled = false) {},
                 contentAlignment = Alignment.Center
             ) {
@@ -97,8 +89,6 @@ fun RootScreen(component: RootComponent) {
     }
 
     LaunchedEffect(Unit) {
-        bytesQqEn = Res.readBytes("files/qqen.json")
-        bytesRuQq = Res.readBytes("files/ruqq.json")
-        component.checkDbPopulated(bytesQqEn.decodeToString(), bytesRuQq.decodeToString())
+        component.checkDbPopulated()
     }
 }
