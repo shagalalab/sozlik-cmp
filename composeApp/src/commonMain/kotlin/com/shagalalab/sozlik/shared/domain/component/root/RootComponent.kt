@@ -6,6 +6,7 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
+import com.shagalalab.sozlik.shared.data.locale.updateLocale
 import com.shagalalab.sozlik.shared.domain.component.flow.FavoritesFlowComponent
 import com.shagalalab.sozlik.shared.domain.component.flow.FavoritesFlowComponentImpl
 import com.shagalalab.sozlik.shared.domain.component.flow.SearchFlowComponent
@@ -56,7 +57,7 @@ class RootComponentImpl(componentContext: ComponentContext) : RootComponent, Koi
 
     init {
         // setting locale
-//        StringDesc.localeType = StringDesc.LocaleType.Custom(settingsRepository.getSelectedLocale())
+        updateLocale(settingsRepository.getSelectedLocale())
     }
 
     override fun onSearchTabClicked() {

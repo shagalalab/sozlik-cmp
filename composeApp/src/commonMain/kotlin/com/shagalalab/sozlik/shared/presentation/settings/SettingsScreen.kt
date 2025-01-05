@@ -24,7 +24,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
@@ -67,14 +66,18 @@ fun SettingsScreen(component: SettingsComponent, modifier: Modifier = Modifier) 
         Column(modifier) {
             TopAppBar(title = { Text(stringResource(Res.string.settings)) })
             SettingsItem(
-                Res.drawable.languages,
-                stringResource(Res.string.selected_language),
+                icon = Res.drawable.languages,
+                label = stringResource(Res.string.selected_language),
                 value = selectedOption,
                 onClick = component::onClickLayout
             )
-            SettingsItem(Res.drawable.info, stringResource(Res.string.about), onClick = component::onClickAbout)
+            SettingsItem(icon = Res.drawable.info, label = stringResource(Res.string.about), onClick = component::onClickAbout)
             if (isSettingsShareEnabled) {
-                SettingsItem(Res.drawable.share, stringResource(Res.string.share), onClick = component::onClickShare)
+                SettingsItem(
+                    icon = Res.drawable.share,
+                    label = stringResource(Res.string.share),
+                    onClick = component::onClickShare
+                )
             }
         }
 
@@ -158,9 +161,6 @@ fun SelectLayoutDialog(component: SettingsLayoutComponent, selectedOption: Strin
 
 @Composable
 fun SelectAboutDialog(component: SettingsAboutComponent) {
-    val uriHandler = LocalUriHandler.current
-    val shagalalabUrl = "www.shagalalab.com"
-
     AlertDialog(
         onDismissRequest = { component.onDismissClicked() },
         confirmButton = {},
@@ -184,7 +184,6 @@ fun SelectAboutDialog(component: SettingsAboutComponent) {
                 }
                 append(stringResource(Res.string.about_content3))
             }
-
             Text(annotatedAboutStringWithUrl)
         }
     )

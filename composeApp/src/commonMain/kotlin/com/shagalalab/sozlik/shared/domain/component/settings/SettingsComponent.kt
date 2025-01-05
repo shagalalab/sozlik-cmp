@@ -7,6 +7,7 @@ import com.arkivanov.decompose.router.slot.activate
 import com.arkivanov.decompose.router.slot.childSlot
 import com.arkivanov.decompose.router.slot.dismiss
 import com.arkivanov.decompose.value.Value
+import com.shagalalab.sozlik.shared.data.locale.updateLocale
 import com.shagalalab.sozlik.shared.domain.component.settings.about.SettingsAboutComponentImpl
 import com.shagalalab.sozlik.shared.domain.component.settings.layout.SettingsLayoutComponentImpl
 import com.shagalalab.sozlik.shared.domain.repository.SettingsRepository
@@ -48,8 +49,7 @@ class SettingsComponentImpl(
                             val previousOption = settingsRepository.getSelectedLayoutOption()
                             if (updatedOption != previousOption) {
                                 val locale = settingsRepository.updateSelectedLayoutOption(updatedOption)
-                                locale.length
-//                                StringDesc.localeType = StringDesc.LocaleType.Custom(locale)
+                                updateLocale(locale)
                             }
                         },
                         onDismissed = dialogNavigation::dismiss,
