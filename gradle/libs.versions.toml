@@ -9,7 +9,7 @@ decompose = "3.2.2"
 gradle = "8.7.3"
 koin = "4.0.1"
 kotlin = "2.1.0"
-serialization = "1.7.3"
+serialization = "1.8.0"
 settings = "1.1.1"
 sqldelight = "1.5.5"
 
