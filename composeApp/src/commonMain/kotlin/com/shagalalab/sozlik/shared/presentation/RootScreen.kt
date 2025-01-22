@@ -4,11 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -27,35 +23,39 @@ import com.shagalalab.sozlik.shared.domain.component.root.RootComponent
 import com.shagalalab.sozlik.shared.presentation.flow.FavoritesFlowScreen
 import com.shagalalab.sozlik.shared.presentation.flow.SearchFlowScreen
 import com.shagalalab.sozlik.shared.presentation.flow.SettingsFlowScreen
-import org.jetbrains.compose.resources.ExperimentalResourceApi
+import io.github.alexzhirkevich.cupertino.adaptive.AdaptiveCircularProgressIndicator
+import io.github.alexzhirkevich.cupertino.adaptive.AdaptiveNavigationBar
+import io.github.alexzhirkevich.cupertino.adaptive.AdaptiveNavigationBarItem
+import io.github.alexzhirkevich.cupertino.adaptive.AdaptiveScaffold
+import io.github.alexzhirkevich.cupertino.adaptive.ExperimentalAdaptiveApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
-@OptIn(ExperimentalResourceApi::class)
+@OptIn(ExperimentalAdaptiveApi::class)
 @Composable
 fun RootScreen(component: RootComponent) {
     val childStack by component.childStack.subscribeAsState()
     val isLoading by component.isLoading.collectAsState(false)
     val activeComponent = childStack.active.instance
 
-    Scaffold(
+    AdaptiveScaffold(
         bottomBar = {
-            NavigationBar {
-                NavigationBarItem(
+            AdaptiveNavigationBar {
+                AdaptiveNavigationBarItem(
                     icon = { Icon(painter = painterResource(Res.drawable.search), contentDescription = null) },
                     label = { Text(stringResource(Res.string.search)) },
                     selected = activeComponent is RootComponent.Child.SearchFlowChild,
                     onClick = component::onSearchTabClicked,
                     enabled = !isLoading
                 )
-                NavigationBarItem(
+                AdaptiveNavigationBarItem(
                     icon = { Icon(painter = painterResource(Res.drawable.heart_border), contentDescription = null) },
                     label = { Text(stringResource(Res.string.favorites)) },
                     selected = activeComponent is RootComponent.Child.FavoritesFlowChild,
                     onClick = component::onFavoritesTabClicked,
                     enabled = !isLoading
                 )
-                NavigationBarItem(
+                AdaptiveNavigationBarItem(
                     icon = { Icon(painter = painterResource(Res.drawable.settings), contentDescription = null) },
                     label = { Text(stringResource(Res.string.settings)) },
                     selected = activeComponent is RootComponent.Child.SettingsFlowChild,
@@ -83,7 +83,7 @@ fun RootScreen(component: RootComponent) {
                     .clickable(enabled = false) {},
                 contentAlignment = Alignment.Center
             ) {
-                CircularProgressIndicator()
+                AdaptiveCircularProgressIndicator()
             }
         }
     }
