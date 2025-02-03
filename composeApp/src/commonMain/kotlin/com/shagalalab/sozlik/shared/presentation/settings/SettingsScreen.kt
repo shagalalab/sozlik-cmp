@@ -9,14 +9,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -39,6 +35,7 @@ import com.shagalalab.sozlik.resources.about
 import com.shagalalab.sozlik.resources.about_content1
 import com.shagalalab.sozlik.resources.about_content2
 import com.shagalalab.sozlik.resources.about_content3
+import com.shagalalab.sozlik.resources.cancel
 import com.shagalalab.sozlik.resources.info
 import com.shagalalab.sozlik.resources.languages
 import com.shagalalab.sozlik.resources.publisher
@@ -47,16 +44,24 @@ import com.shagalalab.sozlik.resources.select_app_layout_description
 import com.shagalalab.sozlik.resources.selected_language
 import com.shagalalab.sozlik.resources.settings
 import com.shagalalab.sozlik.resources.share
+import com.shagalalab.sozlik.resources.share_2
 import com.shagalalab.sozlik.resources.website
 import com.shagalalab.sozlik.shared.domain.component.settings.SettingsComponent
 import com.shagalalab.sozlik.shared.domain.component.settings.about.SettingsAboutComponent
 import com.shagalalab.sozlik.shared.domain.component.settings.layout.SettingsLayoutComponent
 import com.shagalalab.sozlik.shared.util.isSettingsShareEnabled
+import io.github.alexzhirkevich.cupertino.adaptive.AdaptiveAlertDialog
+import io.github.alexzhirkevich.cupertino.adaptive.AdaptiveHorizontalDivider
+import io.github.alexzhirkevich.cupertino.adaptive.AdaptiveTopAppBar
+import io.github.alexzhirkevich.cupertino.adaptive.AdaptiveWidget
+import io.github.alexzhirkevich.cupertino.adaptive.ExperimentalAdaptiveApi
+import io.github.alexzhirkevich.cupertino.cancel
+import io.github.alexzhirkevich.cupertino.default
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalAdaptiveApi::class)
 @Composable
 fun SettingsScreen(component: SettingsComponent, modifier: Modifier = Modifier) {
     var selectedOption by remember { mutableStateOf(component.defaultLayout) }
@@ -64,7 +69,7 @@ fun SettingsScreen(component: SettingsComponent, modifier: Modifier = Modifier) 
 
     Box(modifier) {
         Column(modifier) {
-            TopAppBar(title = { Text(stringResource(Res.string.settings)) })
+            AdaptiveTopAppBar(title = { Text(stringResource(Res.string.settings)) })
             SettingsItem(
                 icon = Res.drawable.languages,
                 label = stringResource(Res.string.selected_language),
@@ -74,7 +79,8 @@ fun SettingsScreen(component: SettingsComponent, modifier: Modifier = Modifier) 
             SettingsItem(icon = Res.drawable.info, label = stringResource(Res.string.about), onClick = component::onClickAbout)
             if (isSettingsShareEnabled) {
                 SettingsItem(
-                    icon = Res.drawable.share,
+                    icon = Res.drawable.share_2,
+                    iconIos = Res.drawable.share,
                     label = stringResource(Res.string.share),
                     onClick = component::onClickShare
                 )
@@ -96,32 +102,43 @@ fun SettingsScreen(component: SettingsComponent, modifier: Modifier = Modifier) 
     }
 }
 
+@OptIn(ExperimentalAdaptiveApi::class)
 @Composable
-private fun SettingsItem(icon: DrawableResource, label: String, value: String = "", modifier: Modifier = Modifier, onClick: () -> Unit) {
+private fun SettingsItem(icon: DrawableResource, iconIos: DrawableResource? = null, label: String, value: String = "", modifier: Modifier = Modifier, onClick: () -> Unit) {
     Column(modifier = modifier.clickable(onClick = onClick)) {
         Row(
             modifier = Modifier.fillMaxWidth().height(56.dp).padding(horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(painter = painterResource(icon), contentDescription = null)
+            AdaptiveWidget(
+                cupertino = {
+                    Icon(painter = painterResource(iconIos ?: icon), contentDescription = null)
+                },
+                material = {
+                    Icon(painter = painterResource(icon), contentDescription = null)
+                }
+            )
             Text(label, modifier = Modifier.fillMaxWidth().weight(1f).padding(horizontal = 16.dp))
             if (value.isNotEmpty()) {
                 Text(value)
             }
         }
-        HorizontalDivider(modifier = Modifier.fillMaxWidth())
+        AdaptiveHorizontalDivider(modifier = Modifier.fillMaxWidth())
     }
 }
 
+@OptIn(ExperimentalAdaptiveApi::class)
 @Composable
 fun SelectLayoutDialog(component: SettingsLayoutComponent, selectedOption: String, onSelectedOptionChanged: (String) -> Unit) {
-    AlertDialog(
+    AdaptiveAlertDialog(
         onDismissRequest = { component.onDismissClicked() },
-        confirmButton = {},
+        buttons = {
+            cancel(onClick = { component.onDismissClicked() }) { Text(stringResource(Res.string.cancel)) }
+        },
         title = {
             Text(text = stringResource(Res.string.select_app_layout))
         },
-        text = {
+        message = {
             Column(Modifier.selectableGroup()) {
                 component.layoutOptions.forEach { text ->
                     Row(
@@ -159,15 +176,18 @@ fun SelectLayoutDialog(component: SettingsLayoutComponent, selectedOption: Strin
     )
 }
 
+@OptIn(ExperimentalAdaptiveApi::class)
 @Composable
 fun SelectAboutDialog(component: SettingsAboutComponent) {
-    AlertDialog(
+    AdaptiveAlertDialog(
         onDismissRequest = { component.onDismissClicked() },
-        confirmButton = {},
+        buttons = {
+            default(onClick = { component.onDismissClicked() }) { Text("OK") }
+        },
         title = {
             Text(text = stringResource(Res.string.about))
         },
-        text = {
+        message = {
             val annotatedAboutStringWithUrl = buildAnnotatedString {
                 append(stringResource(Res.string.about_content1))
                 withStyle(SpanStyle(fontWeight = FontWeight.SemiBold)) {

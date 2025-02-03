@@ -1,10 +1,13 @@
 package com.shagalalab.sozlik.shared.presentation.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import io.github.alexzhirkevich.cupertino.adaptive.AdaptiveTheme
+import io.github.alexzhirkevich.cupertino.adaptive.CupertinoThemeSpec
+import io.github.alexzhirkevich.cupertino.adaptive.ExperimentalAdaptiveApi
+import io.github.alexzhirkevich.cupertino.adaptive.MaterialThemeSpec
 
 private val lightColorScheme = lightColorScheme(
     primary = md_theme_light_primary,
@@ -70,20 +73,27 @@ private val darkColorScheme = darkColorScheme(
     onSurfaceVariant = md_theme_dark_onSurfaceVariant,
 )
 
+@OptIn(ExperimentalAdaptiveApi::class)
 @Composable
 fun SozlikTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val colorScheme = when {
-        darkTheme -> darkColorScheme
-        else -> lightColorScheme
-    }
-
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        shapes = Shapes,
-        content = content,
+    AdaptiveTheme(
+        material = MaterialThemeSpec.Default(
+            colorScheme = when {
+                darkTheme -> darkColorScheme
+                else -> lightColorScheme
+            },
+            shapes = Shapes,
+        ),
+        cupertino = CupertinoThemeSpec.Default(
+            colorScheme = if (darkTheme) {
+                io.github.alexzhirkevich.cupertino.theme.darkColorScheme()
+            } else {
+                io.github.alexzhirkevich.cupertino.theme.lightColorScheme()
+            },
+        ),
+        content = content
     )
 }

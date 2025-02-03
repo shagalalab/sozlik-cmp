@@ -10,13 +10,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -33,15 +30,18 @@ import com.shagalalab.sozlik.resources.heart
 import com.shagalalab.sozlik.resources.heart_border
 import com.shagalalab.sozlik.shared.domain.component.favorites.FavoritesComponent
 import com.shagalalab.sozlik.shared.domain.mvi.model.Dictionary
+import io.github.alexzhirkevich.cupertino.adaptive.AdaptiveHorizontalDivider
+import io.github.alexzhirkevich.cupertino.adaptive.AdaptiveTopAppBar
+import io.github.alexzhirkevich.cupertino.adaptive.ExperimentalAdaptiveApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalAdaptiveApi::class)
 @Composable
 fun FavoritesScreen(component: FavoritesComponent, modifier: Modifier = Modifier) {
     val favorites by component.state.collectAsState()
     Column {
-        TopAppBar(title = { Text(stringResource(Res.string.favorites)) })
+        AdaptiveTopAppBar(title = { Text(stringResource(Res.string.favorites)) })
         if (favorites.favoriteWords.isEmpty()) {
             Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -68,6 +68,7 @@ fun FavoritesScreen(component: FavoritesComponent, modifier: Modifier = Modifier
     }
 }
 
+@OptIn(ExperimentalAdaptiveApi::class)
 @Composable
 private fun FavoriteItem(word: Dictionary, itemClick: (Long) -> Unit, onFavoriteClick: (Long) -> Unit) {
     Column(modifier = Modifier.clickable { itemClick(word.id) }) {
@@ -77,6 +78,6 @@ private fun FavoriteItem(word: Dictionary, itemClick: (Long) -> Unit, onFavorite
                 Icon(painter = painterResource(Res.drawable.heart), contentDescription = null)
             }
         }
-        HorizontalDivider()
+        AdaptiveHorizontalDivider()
     }
 }
