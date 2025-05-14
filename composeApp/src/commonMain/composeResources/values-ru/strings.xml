@@ -10,6 +10,8 @@
         \nкитапларына тийкарланған.
     </string>
     <string name="app_name">Sózlik</string>
+    <string name="back">Артқа</string>
+    <string name="cancel">Бийкар етиў</string>
     <string name="favorites">Сайландылар</string>
     <string name="favorites_empty">Сиз еле ҳеш бир сөзди сайландылар қатарына қоспадыңыз, қосқанларыңыз усы жерде көринеди.</string>
     <string name="search">Излеў</string>
@@ -19,6 +21,6 @@
     <string name="selected_language">Сайланған әлипбе</string>
     <string name="settings">Сазлаўлар</string>
     <string name="share">Бөлисиў</string>
-    <string name="suggestion_found">&lt;b&gt;%s&lt;/b&gt; сөзи табылмады, бәлким төмендегилерди излеген шығарсыз:</string>
-    <string name="suggestion_not_found">&lt;b&gt;%s&lt;/b&gt; сөзи бойынша нәтийжелер табылмады.</string>
+    <string name="suggestion_found">&lt;b&gt;%1$s&lt;/b&gt; сөзи табылмады, бәлким төмендегилерди излеген шығарсыз:</string>
+    <string name="suggestion_not_found">&lt;b&gt;%1$s&lt;/b&gt; сөзи бойынша нәтийжелер табылмады.</string>
 </resources>
