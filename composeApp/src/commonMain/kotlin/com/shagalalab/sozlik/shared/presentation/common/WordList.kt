@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,6 +15,8 @@ import androidx.compose.ui.unit.dp
 import com.shagalalab.sozlik.resources.Res
 import com.shagalalab.sozlik.resources.chevron_right
 import com.shagalalab.sozlik.shared.domain.mvi.model.DictionaryBase
+import io.github.alexzhirkevich.cupertino.adaptive.AdaptiveHorizontalDivider
+import io.github.alexzhirkevich.cupertino.adaptive.ExperimentalAdaptiveApi
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -29,6 +30,7 @@ fun WordList(words: List<DictionaryBase>, modifier: Modifier, itemClick: (Long) 
     }
 }
 
+@OptIn(ExperimentalAdaptiveApi::class)
 @Composable
 private fun WordItem(word: DictionaryBase, itemClick: (Long) -> Unit) {
     Column(modifier = Modifier.clickable { itemClick(word.id) }) {
@@ -41,6 +43,6 @@ private fun WordItem(word: DictionaryBase, itemClick: (Long) -> Unit) {
                 modifier = Modifier.padding(start = 16.dp)
             )
         }
-        HorizontalDivider()
+        AdaptiveHorizontalDivider()
     }
 }

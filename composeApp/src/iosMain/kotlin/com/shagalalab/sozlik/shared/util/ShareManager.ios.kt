@@ -9,7 +9,15 @@ class AppleShareManager : ShareManager {
     private val shareAppMessage: String = "Men Sózlik baǵdarlamasınan paydalanaman, siz hám onı mına jerden ornatıp alsańız boladı: https://bit.ly/m/sozlik"
 
     override fun shareApp() {
-        val activityController = UIActivityViewController(activityItems = listOf(shareAppMessage), applicationActivities = null)
+        share(shareAppMessage)
+    }
+
+    override fun shareTranslation(wordTranslation: String) {
+        share(wordTranslation)
+    }
+
+    private fun share(message: String) {
+        val activityController = UIActivityViewController(activityItems = listOf(message), applicationActivities = null)
         val window = UIApplication.sharedApplication.windows().first() as UIWindow?
         window?.rootViewController?.presentViewController(
             activityController as UIViewController,

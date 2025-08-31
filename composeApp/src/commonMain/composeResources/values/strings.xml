@@ -10,6 +10,8 @@
         \nkitaplarına tiykarlanǵan.
     </string>
     <string name="app_name">Sózlik</string>
+    <string name="back">Artqa</string>
+    <string name="cancel">Biykar etiw</string>
     <string name="favorites">Saylandılar</string>
     <string name="favorites_empty">Siz ele hesh bir sózdi saylandılar qatarına qospadıńız, qosqanlarıńız usı jerde kórinedi.</string>
     <string name="layout_cyrillic">Кирилл</string>
@@ -22,7 +24,7 @@
     <string name="selected_language">Saylanǵan álipbe</string>
     <string name="settings">Sazlawlar</string>
     <string name="share">Bólisiw</string>
-    <string name="suggestion_found">&lt;b&gt;%s&lt;/b&gt; sózi tabılmadı, bálkim tómendegilerdi izlegen shıǵarsız:</string>
-    <string name="suggestion_not_found">&lt;b&gt;%s&lt;/b&gt; sózi boyınsha nátiyjeler tabılmadı.</string>
+    <string name="suggestion_found">&lt;b&gt;%1$s&lt;/b&gt; sózi tabılmadı, bálkim tómendegilerdi izlegen shıǵarsız:</string>
+    <string name="suggestion_not_found">&lt;b&gt;%1$s&lt;/b&gt; sózi boyınsha nátiyjeler tabılmadı.</string>
     <string name="website">https://www.shagalalab.com</string>
 </resources>

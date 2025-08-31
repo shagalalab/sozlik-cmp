@@ -41,6 +41,7 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
 
+            implementation(libs.cupertino.adaptive)
             implementation(libs.decompose)
             implementation(libs.decompose.compose)
             implementation(libs.serialization.json)

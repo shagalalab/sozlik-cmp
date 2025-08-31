@@ -7,9 +7,17 @@ internal class AndroidShareManager(private val context: Context) : ShareManager 
     private val shareAppMessage: String = "Men Sózlik baǵdarlamasınan paydalanaman, siz hám onı mına jerden ornatıp alsańız boladı: https://bit.ly/m/sozlik"
 
     override fun shareApp() {
+        share(shareAppMessage)
+    }
+
+    override fun shareTranslation(wordTranslation: String) {
+        share(wordTranslation)
+    }
+
+    private fun share(message: String) {
         val sendIntent = Intent()
         sendIntent.action = Intent.ACTION_SEND
-        sendIntent.putExtra(Intent.EXTRA_TEXT, shareAppMessage)
+        sendIntent.putExtra(Intent.EXTRA_TEXT, message)
         sendIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         sendIntent.type = "text/plain"
         context.startActivity(sendIntent)
